@@ -1,0 +1,27 @@
+<div id='app'></div>
+
+<script src="./vue.js" type="text/javaScript"></script>
+
+<script> 
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                title: 'Hello world'
+            }
+        },
+        setUp() {
+            const state = Vue.reactive({
+                title: 'Hello Vue3'
+            })
+
+            setTimeout(() => {
+                state.title = 'Reactive'
+            }, 3000);
+
+            return state
+        }
+    })
+
+    app.mount('#app');
+</script>
