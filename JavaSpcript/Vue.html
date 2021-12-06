@@ -1,0 +1,101 @@
+<div id="app"></div>
+
+<script>
+    const Vue = {
+        createRenderer({querySelector, insert}) {
+            return {
+
+                createApp(options) {
+                    return {
+                        mount(selector) {
+
+                        const parent = querySelector(selector)
+
+                        if (!options.render) {
+                            options.render = this.compile(parent.innerHTML)
+                        }
+
+                        if (options.setUp) {
+                            this.setUpState = options.setUp()
+                        } else {
+                            this.data = options.data()
+                        }
+
+                        this.proxy = new Proxy(this, {
+                            set(target, key, val){
+                                if (key in target.setUpState) {
+                                    target.setUpState[key] = val
+                                } else {
+                                    target.data[key] = val
+                                }
+                            },
+                            get(target, key) {
+                                if (key in target.setUpState) {
+                                    return target.setUpState[key]
+                                } else {
+                                    return target.data[key]
+                                }
+                            }
+                        })
+
+
+                        const el = options.render.call(this.proxy)
+
+                        parent.innerHTML = ''
+
+                        insert(parent, el);
+
+                        },
+                        compile(templete) {
+
+                            return function render() {
+
+                                const h3 = document.createElement('h3')
+
+                                h3.innerText = this.title;
+
+                                return h3
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        createApp(options) {
+            const render = this.createRenderer({
+                querySelector(selector) {
+                    return document.querySelector(selector)
+                },
+                insert(parent, el, anchor) {
+                    return parent.insertBefore(el, anchor || null)
+                }
+            })
+
+            return render.createApp(options)
+        }
+    }
+
+</script>
+
+<script>
+
+    const { createApp } = Vue
+
+    const app =  createApp({
+        data() {
+            return {
+                title: 'Hello World.'
+            }
+        },
+        setUp() {
+            return {
+                title: 'Hello Vue.'
+            }
+        }
+    })
+
+    app.mount('#app')
+
+
+</script>
