@@ -27,8 +27,6 @@ process.stdin.on('data', data => {
 
 process.on('exit', () => {
     const [name, country, fruit] = answers;
-
-    console.log(`
-Thanks for you anwsers!!!!!!!!!!!!!!!    
-    `);
+    console.log(`Your answers: ${name}, ${country}, ${fruit}`)
+    console.log(`Thanks for you anwsers!!!!!!!!!!!!!!!`);
 })

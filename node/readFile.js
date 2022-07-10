@@ -1,11 +1,11 @@
 const fs = require('fs');
 
 // sync
-const text = fs.readFileSync('../file/text.md', 'UTF-8');
+const text = fs.readFileSync('./file/text.md', 'UTF-8');
 
 console.log(text)
 
-fs.readFile('../file/text.md', 'UTF-8', (err, text) => {
+fs.readFile('./file/text.md', 'UTF-8', (err, text) => {
     if (err) {
         throw err
     }

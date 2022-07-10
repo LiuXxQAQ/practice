@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const readStream = fs.createReadStream('../file/text.md', 'UTF-8')
-const writeStream = fs.createWriteStream('../file/test.md', 'UTF-8')
+const readStream = fs.createReadStream('./file/text.md', 'UTF-8')
+const writeStream = fs.createWriteStream('./file/test.md', 'UTF-8')
 
 readStream.pipe(writeStream);
 

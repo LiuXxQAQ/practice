@@ -5,7 +5,7 @@ const json = {
     index: 1
 }
 
-fs.appendFile('../file/color.md', `${json.index}: ${json.color}`, err => {
+fs.appendFile('./file/colors.md', `${json.index}: ${json.color}`, err => {
     if (err) {
         throw err
     }

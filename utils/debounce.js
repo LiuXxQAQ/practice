@@ -1,4 +1,4 @@
-function f(fn, wait) {
+export const debounce = function(fn, wait) {
     let timeout
 
     return function (...arg) {
@@ -9,7 +9,7 @@ function f(fn, wait) {
     }
 }
 
-function d(fn, limit) {
+function f(fn, limit) {
     let now = 0
     return function(...arg) {
         let next = new Date().getTime()
